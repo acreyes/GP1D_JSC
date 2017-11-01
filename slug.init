@@ -11,7 +11,8 @@ sim_riemann 'hllc' # 'roe' 'hll' or 'hllc'
 sim_charLimiting .true.
 
 ######GP specific parameters ##########
-gr_radius 4       # gp stencil radius
+gr_radius 2      # gp stencil radius
+
 ### gp kernel hyperparameters
 ### one of these should be zero always
 ### this is same as \ell in paper
@@ -22,17 +23,19 @@ sim_sigdel 6.0    # fix \ell to number of grid points
 ######## grid variables ########
 gr_ngc 4
 gr_nx 128
-gr_xbeg -1.
-gr_xend 1.5
+
 
 ###### problem specific physical IC ##########
 sim_icType 'shock'
 sim_tmax .4
 
+gr_xbeg -1.
+gr_xend 1.5
+
 sim_Bx 1.0
 sim_shockLoc 0.0
 
-#left and right states for "shock" sim_icType
+#left and right states for "shock" sim icType
 sim_densL 1.0
 sim_velxL 0.0
 sim_velyL 0.0
