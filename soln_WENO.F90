@@ -97,15 +97,8 @@ subroutine soln_WENO(dt, V)
 
      !calculate weight factors
      do s = 1,3
-        if (sim_WENO == '5') then
-           wbarp(DENS_VAR:PRES_VAR, s) = gamp(s)/((sim_WENeps+beta(DENS_VAR:PRES_VAR, s))**sim_mval)
-           wbarm(DENS_VAR:PRES_VAR, s) = gamm(s)/((sim_WENeps+beta(DENS_VAR:PRES_VAR, s))**sim_mval)
-        else if (sim_WENO == 'Z') then
-           wbarp(DENS_VAR:PRES_VAR, s) = gamp(s)*(1 + (ABS(beta(DENS_VAR:PRES_VAR, 1) &
-                - beta(DENS_VAR:PRES_VAR, 3))/(sim_WENeps + beta(DENS_VAR:PRES_VAR, s)))**sim_mval)
-           wbarm(DENS_VAR:PRES_VAR, s) = gamm(s)*(1 + (ABS(beta(DENS_VAR:PRES_VAR, 1) &
-                - beta(DENS_VAR:PRES_VAR, 3))/(sim_WENeps + beta(DENS_VAR:PRES_VAR, s)))**sim_mval)
-        end if
+        wbarp(DENS_VAR:PRES_VAR, s) = gamp(s)/((sim_WENeps+beta(DENS_VAR:PRES_VAR, s))**sim_mval)
+        wbarm(DENS_VAR:PRES_VAR, s) = gamm(s)/((sim_WENeps+beta(DENS_VAR:PRES_VAR, s))**sim_mval)
      end do
 
      wsumm(DENS_VAR:PRES_VAR) = wbarm(DENS_VAR:PRES_VAR,1) + wbarm(DENS_VAR:PRES_VAR,2) &

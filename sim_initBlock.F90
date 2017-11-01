@@ -61,6 +61,21 @@ subroutine sim_initBlock()
               gr_V(MAGZ_VAR,i) = 0.
               gr_V(PRES_VAR,i) = 0.1
            end if
+        elseif (sim_icType == 'shu') then
+           !do IC for shu-osher problem
+           !transform the domain [0,1] onto the one give for the problem:[-4.5,4.5]
+           x = gr_xCoord(i) - 4.5
+           gr_V(VELY_VAR:MAGZ_VAR,i) = 0.
+           if (x < -4.) then
+              !left state
+              gr_V(DENS_VAR,i) = 3.857143
+              gr_V(VELX_VAR,i) = 2.629369
+              gr_V(PRES_VAR,i) = 10.33333
+           else
+              gr_V(DENS_VAR,i) = 1 + .2*SIN(5.*x)
+              gr_V(VELX_VAR,i) = 0.
+              gr_V(PRES_VAR,i) = 1.
+           end if
         elseif (sim_icType == 'shock') then
            !uses sim_pres to get pressure
             if (gr_xCoord(i) < sim_shockLoc) then
